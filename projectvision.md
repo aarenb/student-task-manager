@@ -15,4 +15,4 @@ Students who want to organize and keep track of their studies and deadlines.
 **Techniques**
 - Javascript, html & css
 - Deployed on Netlify
-- Using the [date-time-manager](https://www.npmjs.com/package/time-date-manager) module
+- Using the [time-date-manager](https://www.npmjs.com/package/time-date-manager) module
