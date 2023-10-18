@@ -1,6 +1,14 @@
 const template = document.createElement('template')
 template.innerHTML = `
-<p> this is a task manager application </p>
+<style>
+  #main{
+    background: pink;
+    padding: 50px;
+  }
+</style>
+<div id="main">
+  <p> this is a task manager application </p>
+</div>
 `
 
 customElements.define('task-application',
