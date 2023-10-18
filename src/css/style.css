@@ -1,0 +1,10 @@
+body {
+  background: rgb(185, 250, 215);
+  font-family: "Comic Sans MS", "Comic Sans";
+  margin: 40px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 50px;
+}
