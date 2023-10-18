@@ -15,7 +15,7 @@ template.innerHTML = `
   #name {
     margin-left: 8px;
   }
-  #check {
+  #checkBox {
     width: 20px;
     height: 20px;
   }
@@ -33,7 +33,7 @@ template.innerHTML = `
 </style>
 <div id="container">
   <div id="checkAndName">
-    <input type="checkbox" id="check"/> 
+    <input type="checkbox" id="checkBox"/> 
     <h3 id="name"> Fix this website </h3>
   </div>
   <p id="description"> Very important!! have to get that csn </p>
@@ -50,6 +50,11 @@ customElements.define('task-item',
    * Represents a task-item element.
    */
   class extends HTMLElement {
+    #name
+    #description
+    #date
+    #time
+    #checkbox
     /**
      * Creates an instance of the current type.
      */
@@ -58,6 +63,13 @@ customElements.define('task-item',
 
       this.attachShadow({ mode: 'open' })
         .appendChild(template.content.cloneNode(true))
+
+      this.#name = this.shadowRoot.querySelector('#name')
+      this.#description = this.shadowRoot.querySelector('#description')
+      this.#description = this.shadowRoot.querySelector('#description')
+      this.#date = this.shadowRoot.querySelector('#date')
+      this.#time = this.shadowRoot.querySelector('#time')
+      this.#checkbox = this.shadowRoot.querySelector('#checkBox')
     }
   }
 )
