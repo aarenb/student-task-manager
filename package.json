@@ -19,5 +19,8 @@
   "devDependencies": {
     "@lnu/eslint-config": "^1.1.7",
     "vite": "^3.1.8"
+  },
+  "dependencies": {
+    "time-date-manager": "^2.0.1"
   }
 }
