@@ -5,7 +5,6 @@ template.innerHTML = `
 <style>
   #main{
     background: yellow;
-    padding: 50px;
   }
 </style>
 <div id="main">
