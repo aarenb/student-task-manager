@@ -69,17 +69,15 @@ customElements.define('new-task-form',
         minute: data.minute,
         isChecked: false
       }
-      console.log('oooo')
-
-      // for (let i = 1; i++;) {
-      //   if (window.localStorage.getItem(i.toString()) !== null) {
-      //     window.localStorage.setItem(i.toString(), JSON.stringify(taskObject))
-      //     break
-      //   }
-      // }
-
-      window.localStorage.setItem('task', JSON.stringify(taskObject))
-      console.log('aaaaa')
+      let i = 1
+      let notSet = true
+      while (notSet) {
+        if (localStorage.getItem(i.toString()) == null) {
+          localStorage.setItem(i.toString(), JSON.stringify(taskObject))
+          notSet = false
+        }
+        i++
+      }
     }
   }
 )
