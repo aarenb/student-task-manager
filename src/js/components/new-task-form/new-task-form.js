@@ -28,6 +28,7 @@ customElements.define('new-task-form',
    * Represents a task-application element.
    */
   class extends HTMLElement {
+    #form
     /**
      * Creates an instance of the current type.
      */
@@ -36,6 +37,25 @@ customElements.define('new-task-form',
 
       this.attachShadow({ mode: 'open' })
         .appendChild(template.content.cloneNode(true))
+
+      this.#form = this.shadowRoot.querySelector('form')
+      const newTask = new CustomEvent('newTask')
+
+      this.#form.addEventListener('submit', (event) => {
+        this.saveTaskInfo()
+        this.dispatchEvent(newTask)
+        event.preventDefault()
+      })
+    }
+
+    /**
+     * Saves the task info to local storage.
+     */
+    saveTaskInfo () {
+      const formData = new FormData(this.#form)
+      const data = Object.fromEntries(formData)
+      console.log(data.name)
+      console.log(data.date)
     }
   }
 )
