@@ -55,6 +55,7 @@ customElements.define('task-item',
     #date
     #time
     #checkbox
+    #taskId
     /**
      * Creates an instance of the current type.
      */
@@ -105,6 +106,15 @@ customElements.define('task-item',
      */
     setDueTime (time) { // TODO: Change name?
       this.#time.textContent = time
+    }
+
+    /**
+     * Sets the task id.
+     *
+     * @param {string} id - The task id to set.
+     */
+    setTaskId (id) {
+      this.#taskId = id
     }
 
     /**

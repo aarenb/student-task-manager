@@ -55,6 +55,7 @@ customElements.define('task-list',
           newTask.setDueDate(dueDate)
           newTask.setDueTime(dueTime)
           newTask.setCheckBox(task.isChecked)
+          newTask.setTaskId(`${i}`)
           this.#main.appendChild(newTask)
         }
       }
