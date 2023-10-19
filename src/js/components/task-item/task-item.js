@@ -71,5 +71,50 @@ customElements.define('task-item',
       this.#time = this.shadowRoot.querySelector('#time')
       this.#checkbox = this.shadowRoot.querySelector('#checkBox')
     }
+
+    /**
+     * Sets the task's name.
+     *
+     * @param {string} name - The name to set.
+     */
+    setName (name) {
+      this.#name.textContent = name
+    }
+
+    /**
+     * Sets the task's description.
+     *
+     * @param {string} description - The description to set.
+     */
+    setDescription (description) {
+      this.#description.textContent = description
+    }
+
+    /**
+     * Sets the task's due date.
+     *
+     * @param {string} date - The due date to set.
+     */
+    setDueDate (date) {
+      this.#date.textContent = date
+    }
+
+    /**
+     * Sets the task's due time.
+     *
+     * @param {string} time - The due time to set.
+     */
+    setDueTime (time) { // TODO: Change name?
+      this.#time.textContent = time
+    }
+
+    /**
+     * Sets the check box to checked or not.
+     *
+     * @param {boolean} isChecked - True if check box is checked.
+     */
+    setCheckBox (isChecked) {
+      this.#checkbox.checked = isChecked
+    }
   }
 )
