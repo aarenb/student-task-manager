@@ -17,6 +17,7 @@ customElements.define('task-list',
    * Represents a task-list element.
    */
   class extends HTMLElement {
+    #main
     /**
      * Creates an instance of the current type.
      */
@@ -25,6 +26,8 @@ customElements.define('task-list',
 
       this.attachShadow({ mode: 'open' })
         .appendChild(template.content.cloneNode(true))
+
+      this.#main = this.shadowRoot.querySelector('#main')
 
       this.setItems()
     }
@@ -39,7 +42,7 @@ customElements.define('task-list',
       newTask.setDueDate('19/10/2023')
       newTask.setDueTime('11:30')
       newTask.setCheckBox(true)
-      this.shadowRoot.appendChild(newTask)
+      this.#main.appendChild(newTask)
     }
   }
 )

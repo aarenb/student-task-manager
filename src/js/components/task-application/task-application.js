@@ -1,4 +1,5 @@
 import '../task-list'
+import '../new-task-form'
 
 const template = document.createElement('template')
 template.innerHTML = `
@@ -10,6 +11,7 @@ template.innerHTML = `
 </style>
 <div id="main">
   <p> this is a task manager application </p>
+  <new-task-form></new-task-form>
   <task-list></task-list>
 </div>
 `
