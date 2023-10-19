@@ -9,8 +9,6 @@ template.innerHTML = `
 </style>
 <div id="main">
   <p> this is a task list </p>
-  <task-item></task-item>
-  <task-item></task-item>
 </div>
 `
 
@@ -27,6 +25,18 @@ customElements.define('task-list',
 
       this.attachShadow({ mode: 'open' })
         .appendChild(template.content.cloneNode(true))
+
+      this.setItems()
+    }
+
+    setItems () {
+      const newTask = document.createElement('task-item')
+      newTask.setName('test')
+      newTask.setDescription('test test test')
+      newTask.setDueDate('19/10/2023')
+      newTask.setDueTime('11:30')
+      newTask.setCheckBox(true)
+      this.shadowRoot.appendChild(newTask)
     }
   }
 )

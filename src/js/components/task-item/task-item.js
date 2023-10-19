@@ -66,7 +66,6 @@ customElements.define('task-item',
 
       this.#name = this.shadowRoot.querySelector('#name')
       this.#description = this.shadowRoot.querySelector('#description')
-      this.#description = this.shadowRoot.querySelector('#description')
       this.#date = this.shadowRoot.querySelector('#date')
       this.#time = this.shadowRoot.querySelector('#time')
       this.#checkbox = this.shadowRoot.querySelector('#checkBox')
