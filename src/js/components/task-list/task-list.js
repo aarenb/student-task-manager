@@ -38,6 +38,7 @@ customElements.define('task-list',
      * Sets the task items.
      */
     setTasks () {
+      this.#clearTasks()
       for (let i = 1; i < localStorage.length + 1; i++) {
         let task = localStorage.getItem(`${i}`)
         task = JSON.parse(task)
@@ -56,6 +57,16 @@ customElements.define('task-list',
           newTask.setCheckBox(task.isChecked)
           this.#main.appendChild(newTask)
         }
+      }
+    }
+
+    /**
+     * Removes any task-items inside of the task-list.
+     */
+    #clearTasks () {
+      const tasks = this.shadowRoot.querySelectorAll('task-item')
+      for (let i = 0; i < tasks.length; i++) {
+        tasks[i].remove()
       }
     }
   }
