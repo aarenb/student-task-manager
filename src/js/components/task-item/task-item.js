@@ -72,14 +72,14 @@ customElements.define('task-item',
       this.#checkbox = this.shadowRoot.querySelector('#checkBox')
 
       this.#checkbox.addEventListener('change', (event) => {
-        this.#saveIfChecked()
+        this.#saveCheckboxStatus()
       })
     }
 
     /**
      * Saves the tasks' checkbox status to local storage.
      */
-    #saveIfChecked () {
+    #saveCheckboxStatus () {
       let taskObject = localStorage.getItem(this.#taskId)
       taskObject = JSON.parse(taskObject)
       if (this.#checkbox.checked) {
