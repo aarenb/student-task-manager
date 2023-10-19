@@ -36,7 +36,7 @@ customElements.define('task-application',
       this.#taskList = this.shadowRoot.querySelector('task-list')
 
       this.#taskForm.addEventListener('newTask', (event) => {
-        this.#taskList.setItems()
+        this.#taskList.setTasks()
       })
     }
   }

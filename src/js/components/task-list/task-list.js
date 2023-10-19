@@ -31,21 +31,27 @@ customElements.define('task-list',
 
       this.#main = this.shadowRoot.querySelector('#main')
 
-      this.setItems()
+      this.setTasks()
     }
 
     /**
      * Sets the task items.
      */
-    setItems () {
+    setTasks () {
       let task = window.localStorage.getItem('task')
       task = JSON.parse(task)
+
+      const taskDate = new Date(Number(task.year), Number(task.month), Number(task.day))
+      const dueDate = taskDate.getFormatedDate('dd/mm/yy')
+
+      const taskTime = new Time(Number(task.hour), Number(task.minute))
+      const dueTime = taskTime.getTimeIn24HourClockFormat()
 
       const newTask = document.createElement('task-item')
       newTask.setName(task.name)
       newTask.setDescription(task.description)
-      newTask.setDueDate('sss')
-      newTask.setDueTime('ssss')
+      newTask.setDueDate(dueDate)
+      newTask.setDueTime(dueTime)
       newTask.setCheckBox(true)
       this.#main.appendChild(newTask)
 

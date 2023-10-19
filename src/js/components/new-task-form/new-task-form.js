@@ -1,5 +1,3 @@
-import { Date, Time } from 'time-date-manager'
-
 const template = document.createElement('template')
 template.innerHTML = `
 <style>
@@ -57,18 +55,18 @@ customElements.define('new-task-form',
       const formData = new FormData(this.#form)
       const data = Object.fromEntries(formData)
 
-      // const year = `${data.date.charAt(0)}${data.date.charAt(1)}${data.date.charAt(2)}${data.date.charAt(3)}`
-      // const month = `${data.date.charAt(5)}${data.date.charAt(6)}`
-      // const day = `${data.date.charAt(8)}${data.date.charAt(9)}`
-      // const taskDate = new Date(Number(year), Number(month), Number(day))
-
-      // const taskTime = new Time(Number(data.hour), Number(data.minute))
+      const yearData = `${data.date.charAt(0)}${data.date.charAt(1)}${data.date.charAt(2)}${data.date.charAt(3)}`
+      const monthData = `${data.date.charAt(5)}${data.date.charAt(6)}`
+      const dayData = `${data.date.charAt(8)}${data.date.charAt(9)}`
 
       const taskObject = {
         name: data.name,
         description: data.description,
-        date: 'test',
-        time: 'taskTime',
+        year: yearData,
+        month: monthData,
+        day: dayData,
+        hour: data.hour,
+        minute: data.minute,
         isChecked: false
       }
       console.log('oooo')
