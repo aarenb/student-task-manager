@@ -10,7 +10,7 @@ template.innerHTML = `
   }
 </style>
 <div id="main">
-  <p> this is a task list </p>
+  <h2>Tasks:</h2>
 </div>
 `
 
@@ -52,7 +52,7 @@ customElements.define('task-list',
       newTask.setDescription(task.description)
       newTask.setDueDate(dueDate)
       newTask.setDueTime(dueTime)
-      newTask.setCheckBox(true)
+      newTask.setCheckBox(task.isChecked)
       this.#main.appendChild(newTask)
 
       // for (let i = 0; i < window.localStorage.length; i++) {

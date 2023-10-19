@@ -34,13 +34,13 @@ template.innerHTML = `
 <div id="container">
   <div id="checkAndName">
     <input type="checkbox" id="checkBox"/> 
-    <h3 id="name"> Fix this website </h3>
+    <h3 id="name"></h3>
   </div>
-  <p id="description"> Very important!! have to get that csn </p>
+  <p id="description"></p>
   <div id="dueDate">
   <p> Due by: </p>
-  <p id="date"> 23/10/2023 </p>
-  <p id="time"> 09:00 </p>
+  <p id="date"></p>
+  <p id="time"></p>
   </div>
 </div>
 `
@@ -110,10 +110,14 @@ customElements.define('task-item',
     /**
      * Sets the check box to checked or not.
      *
-     * @param {boolean} isChecked - True if check box is checked.
+     * @param {string} isChecked - 'True' if check box is checked.
      */
     setCheckBox (isChecked) {
-      this.#checkbox.checked = isChecked
+      if (isChecked === 'true') {
+        this.#checkbox.checked = true
+      } else {
+        this.#checkbox.checked = false
+      }
     }
   }
 )
