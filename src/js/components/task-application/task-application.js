@@ -21,6 +21,8 @@ customElements.define('task-application',
    * Represents a task-application element.
    */
   class extends HTMLElement {
+    #taskForm
+    #taskList
     /**
      * Creates an instance of the current type.
      */
@@ -29,6 +31,13 @@ customElements.define('task-application',
 
       this.attachShadow({ mode: 'open' })
         .appendChild(template.content.cloneNode(true))
+
+      this.#taskForm = this.shadowRoot.querySelector('new-task-form')
+      this.#taskList = this.shadowRoot.querySelector('task-list')
+
+      this.#taskForm.addEventListener('newTask', (event) => {
+        this.#taskList.setItems()
+      })
     }
   }
 )

@@ -1,3 +1,5 @@
+import { Date, Time } from 'time-date-manager'
+
 const template = document.createElement('template')
 template.innerHTML = `
 <style>
@@ -55,26 +57,31 @@ customElements.define('new-task-form',
       const formData = new FormData(this.#form)
       const data = Object.fromEntries(formData)
 
-      const yearData = `${data.date.charAt(0)}${data.date.charAt(1)}${data.date.charAt(2)}${data.date.charAt(3)}`
-      const monthData = `${data.date.charAt(5)}${data.date.charAt(6)}`
-      const dayData = `${data.date.charAt(8)}${data.date.charAt(9)}`
+      // const year = `${data.date.charAt(0)}${data.date.charAt(1)}${data.date.charAt(2)}${data.date.charAt(3)}`
+      // const month = `${data.date.charAt(5)}${data.date.charAt(6)}`
+      // const day = `${data.date.charAt(8)}${data.date.charAt(9)}`
+      // const taskDate = new Date(Number(year), Number(month), Number(day))
+
+      // const taskTime = new Time(Number(data.hour), Number(data.minute))
 
       const taskObject = {
         name: data.name,
         description: data.description,
-        year: yearData,
-        month: monthData,
-        day: dayData,
-        hour: data.hour,
-        minute: data.minute
+        date: 'test',
+        time: 'taskTime',
+        isChecked: false
       }
+      console.log('oooo')
 
-      for (let i = 1; i++;) {
-        if (window.localStorage.getItem(i.toString()) !== null) {
-          window.localStorage.setItem(i.toString(), JSON.stringify(taskObject))
-          break
-        }
-      }
+      // for (let i = 1; i++;) {
+      //   if (window.localStorage.getItem(i.toString()) !== null) {
+      //     window.localStorage.setItem(i.toString(), JSON.stringify(taskObject))
+      //     break
+      //   }
+      // }
+
+      window.localStorage.setItem('task', JSON.stringify(taskObject))
+      console.log('aaaaa')
     }
   }
 )

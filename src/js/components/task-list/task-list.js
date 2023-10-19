@@ -1,5 +1,7 @@
 import '../task-item'
 
+import { Date, Time } from 'time-date-manager'
+
 const template = document.createElement('template')
 template.innerHTML = `
 <style>
@@ -36,13 +38,30 @@ customElements.define('task-list',
      * Sets the task items.
      */
     setItems () {
+      let task = window.localStorage.getItem('task')
+      task = JSON.parse(task)
+
       const newTask = document.createElement('task-item')
-      newTask.setName('test')
-      newTask.setDescription('test test test')
-      newTask.setDueDate('19/10/2023')
-      newTask.setDueTime('11:30')
+      newTask.setName(task.name)
+      newTask.setDescription(task.description)
+      newTask.setDueDate('sss')
+      newTask.setDueTime('ssss')
       newTask.setCheckBox(true)
       this.#main.appendChild(newTask)
+
+      // for (let i = 0; i < window.localStorage.length; i++) {
+      //   const key = window.localStorage.key(i)
+      //   let task = window.localStorage.getItem(key)
+      //   task = JSON.parse(task)
+
+      //   const newTask = document.createElement('task-item')
+      //   newTask.setName(task.name)
+      //   newTask.setDescription(task.description)
+      //   newTask.setDueDate('sss')
+      //   newTask.setDueTime('ssss')
+      //   newTask.setCheckBox(true)
+      //   this.#main.appendChild(newTask)
+      // }
     }
   }
 )
