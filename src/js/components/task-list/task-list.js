@@ -29,6 +29,9 @@ customElements.define('task-list',
       this.setItems()
     }
 
+    /**
+     * Sets the task items.
+     */
     setItems () {
       const newTask = document.createElement('task-item')
       newTask.setName('test')
