@@ -70,6 +70,17 @@ customElements.define('task-item',
       this.#date = this.shadowRoot.querySelector('#date')
       this.#time = this.shadowRoot.querySelector('#time')
       this.#checkbox = this.shadowRoot.querySelector('#checkBox')
+
+      this.#checkbox.addEventListener('change', (event) => {
+        let taskObject = localStorage.getItem(this.#taskId)
+        taskObject = JSON.parse(taskObject)
+        if (this.#checkbox.checked) {
+          taskObject.isChecked = 'true'
+        } else {
+          taskObject.isChecked = 'false'
+        }
+        localStorage.setItem(this.#taskId, JSON.stringify(taskObject))
+      })
     }
 
     /**
