@@ -43,6 +43,7 @@ customElements.define('new-task-form',
 
       this.#form.addEventListener('submit', (event) => {
         this.saveTaskInfo()
+        this.#form.reset()
         this.dispatchEvent(newTask)
         event.preventDefault()
       })
@@ -72,8 +73,8 @@ customElements.define('new-task-form',
       let i = 1
       let notSet = true
       while (notSet) {
-        if (localStorage.getItem(i.toString()) == null) {
-          localStorage.setItem(i.toString(), JSON.stringify(taskObject))
+        if (localStorage.getItem(`${i}`) === null) {
+          localStorage.setItem(`${i}`, JSON.stringify(taskObject))
           notSet = false
         }
         i++

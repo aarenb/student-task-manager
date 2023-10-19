@@ -38,11 +38,10 @@ customElements.define('task-list',
      * Sets the task items.
      */
     setTasks () {
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i)
-        let task = localStorage.getItem(key)
+      for (let i = 1; i < localStorage.length + 1; i++) {
+        let task = localStorage.getItem(`${i}`)
         task = JSON.parse(task)
-        if (task.name != null) {
+        if (task.name !== null) {
           const taskDate = new Date(Number(task.year), Number(task.month), Number(task.day))
           const dueDate = taskDate.getFormatedDate('dd/mm/yy')
 
