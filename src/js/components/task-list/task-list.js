@@ -6,7 +6,7 @@ const template = document.createElement('template')
 template.innerHTML = `
 <style>
   #main{
-    background: rgb(225, 252, 237);
+    background: rgb(227, 255, 240);
     border-radius: 10px;
     padding: 30px;
     margin-top: 20px;
@@ -20,7 +20,7 @@ template.innerHTML = `
     text-align: center;
     text-decoration: underline;
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
   }
 </style>
 <div id="main">
