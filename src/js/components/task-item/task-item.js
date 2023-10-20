@@ -65,7 +65,7 @@ template.innerHTML = `
     position: fixed;
     border: solid 5px black;
     border-radius: 10px;
-    background: white;
+    background: rgb(54, 255, 168);
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -95,6 +95,25 @@ template.innerHTML = `
     display: none;
     width: 440px;
     height: 200px;
+  }
+
+  #editButtons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  .editButton {
+    font-weight: bold;
+    width: 70px;
+    height: 30px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+  }
+
+  #editPopup input {
+    margin-bottom: 5px;
   }
 
 </style>
@@ -138,8 +157,10 @@ template.innerHTML = `
       <input type="number" name="hour" min="0" max="23" id="editHour" required>
       <label> minute: </label>
       <input type="number" name="minute" min="0" max="59" id="editMinute" required><br/>
-      <input type="submit" value="Edit" id="submitButton">
-      <button type="button" id="cancel"> Cancel </button>
+      <div id="editButtons">
+        <input type="submit" value="Edit" id="submitButton" class="editButton">
+        <button type="button" id="cancel" class="editButton"> Cancel </button>
+      </div>
     </form>
   </div>
 </div>
@@ -164,6 +185,7 @@ customElements.define('task-item',
     #editButton
     #editPopup
     #cancelButton
+    #editForm
     /**
      * Creates an instance of the current type.
      */
@@ -186,6 +208,7 @@ customElements.define('task-item',
       this.#editButton = this.shadowRoot.querySelector('#edit')
       this.#editPopup = this.shadowRoot.querySelector('#editPopup')
       this.#cancelButton = this.shadowRoot.querySelector('#cancel')
+      this.#editForm = this.shadowRoot.querySelector('form')
 
       this.#checkbox.addEventListener('change', (event) => {
         this.#saveCheckboxStatus()
@@ -224,6 +247,66 @@ customElements.define('task-item',
         this.#editPopup.style.display = 'none'
         this.#darkenBackground.style.display = 'none'
       })
+
+      const editTask = new CustomEvent('editTask', {
+        bubbles: true,
+        composed: true
+      })
+
+      this.#editForm.addEventListener('submit', (event) => {
+        this.saveTaskInfo()
+        this.#editPopup.style.display = 'none'
+        this.#darkenBackground.style.display = 'none'
+        this.dispatchEvent(editTask)
+        event.preventDefault()
+      })
+    }
+
+    /**
+     * Saves the task info to local storage.
+     */
+    saveTaskInfo () { // TODO: BREAK THIS OUT!! WEE WOO WEE WOO THIS IS BAD
+      const formData = new FormData(this.#editForm)
+      const data = Object.fromEntries(formData)
+      const taskObject = this.#createTaskObject(data)
+
+      let i = 1
+      let notSet = true
+      while (notSet) {
+        if (localStorage.getItem(`${i}`) === null) {
+          localStorage.setItem(`${i}`, JSON.stringify(taskObject))
+          if (localStorage.getItem('highestTaskId') < i || localStorage.getItem('highestTaskId') === null) {
+            localStorage.setItem('highestTaskId', i)
+          }
+          notSet = false
+        }
+        i++
+      }
+    }
+
+    /**
+     * Creates a new task object.
+     *
+     * @param {*} data - The data to turn into a task object.
+     * @returns {object} The created task object.
+     */
+    #createTaskObject (data) { // TODO: BREAK THIS OUT!! WEE WOO WEE WOO THIS IS BAD
+      const yearData = `${data.date.charAt(0)}${data.date.charAt(1)}${data.date.charAt(2)}${data.date.charAt(3)}`
+      const monthData = `${data.date.charAt(5)}${data.date.charAt(6)}`
+      const dayData = `${data.date.charAt(8)}${data.date.charAt(9)}`
+
+      const taskObject = {
+        name: data.name,
+        description: data.description,
+        date: data.date,
+        year: yearData,
+        month: monthData,
+        day: dayData,
+        hour: data.hour,
+        minute: data.minute,
+        isChecked: false
+      }
+      return taskObject
     }
 
     /**
