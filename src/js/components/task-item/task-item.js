@@ -36,19 +36,13 @@ template.innerHTML = `
     height: 150px;
     background: white;
     padding: 10px;
+    position: fixed;
+    top: 0; 
+    left: 0;
+    transform: translate(calc(50vw - 50%), calc(50vh - 50%));
     display: none;
   }
 
-  #centerDiv {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-  }
 </style>
 <div id="container">
   <div id="checkAndName">
@@ -62,16 +56,14 @@ template.innerHTML = `
   <p id="time"></p>
   </div>
   <div id="buttons">
-    <button type="button"> Delete </button>
+    <button type="button" id="delete"> Delete </button>
     <button type="button"> Edit </button>
   </div>
 
-  <div id="centerDiv">
-    <div id="deletePopup">
-      <h3> Are you sure you want to delete this task? </h3>
-      <button type="button"> Yes </button>
-      <button type="button"> No </button>
-    </div>
+  <div id="deletePopup">
+    <h3> Are you sure you want to delete this task? </h3>
+    <button type="button"> Yes </button>
+    <button type="button"> No </button>
   </div>
 </div>
 `
@@ -87,6 +79,8 @@ customElements.define('task-item',
     #time
     #checkbox
     #taskId
+    #deleteButton
+    #deletePopup
     /**
      * Creates an instance of the current type.
      */
@@ -101,9 +95,17 @@ customElements.define('task-item',
       this.#date = this.shadowRoot.querySelector('#date')
       this.#time = this.shadowRoot.querySelector('#time')
       this.#checkbox = this.shadowRoot.querySelector('#checkBox')
+      this.#deleteButton = this.shadowRoot.querySelector('#delete')
+      this.#deletePopup = this.shadowRoot.querySelector('#deletePopup')
+      console.log(this.#deleteButton)
 
       this.#checkbox.addEventListener('change', (event) => {
         this.#saveCheckboxStatus()
+      })
+
+      this.#deleteButton.addEventListener('click', (event) => {
+        console.log('click')
+        this.#deletePopup.style.display = 'block'
       })
     }
 
