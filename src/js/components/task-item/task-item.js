@@ -56,21 +56,23 @@ template.innerHTML = `
     height: 30px;
     font-weight: bold;
   }
-  #deletePopup {
+  .popup{
     z-index: 10;
-    width: 440px;
-    height: 150px;
-    background: white;
-    position: fixed;
     top: 0; 
     left: 0;
     transform: translate(calc(50vw - 50%), calc(50vh - 50%));
+    position: fixed;
+    border: solid 5px black;
+    border-radius: 10px;
+    background: white;
+  }
+  #deletePopup {
+    width: 440px;
+    height: 150px;
     display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: solid 5px black;
-    border-radius: 10px;
   }
   #deletePopup button {
     width: 100px;
@@ -88,6 +90,12 @@ template.innerHTML = `
     background: rgba(0, 0, 0, 0.51)
   }
 
+  #editPopup{
+    display: none;
+    width: 440px;
+    height: 150px;
+  }
+
 </style>
 <div id="container">
   <div id="checkAndName">
@@ -103,17 +111,23 @@ template.innerHTML = `
   </div>
   <div id="buttons">
     <button type="button" id="delete"> Delete </button>
-    <button type="button"> Edit </button>
+    <button type="button" id="edit"> Edit </button>
   </div>
 
   <div id="darkenBackground">
-    <div id="deletePopup">
+    <div id="deletePopup" class="popup">
       <h3> Are you sure you want to delete this task? </h3>
       <div>
         <button type="button" id="yesDelete"> Yes </button>
         <button type="button" id="noDelete"> No </button>
       </div>
     </div>
+  </div>
+
+  <div id="editPopup" class="popup">
+    <h3> Edit the task: </h3>
+    <form>
+    </form>
   </div>
 </div>
 `
@@ -134,6 +148,8 @@ customElements.define('task-item',
     #yesDeleteButton
     #noDeleteButton
     #darkenBackground
+    #editButton
+    #editPopup
     /**
      * Creates an instance of the current type.
      */
@@ -153,6 +169,8 @@ customElements.define('task-item',
       this.#yesDeleteButton = this.shadowRoot.querySelector('#yesDelete')
       this.#noDeleteButton = this.shadowRoot.querySelector('#noDelete')
       this.#darkenBackground = this.shadowRoot.querySelector('#darkenBackground')
+      this.#editButton = this.shadowRoot.querySelector('#edit')
+      this.#editPopup = this.shadowRoot.querySelector('#editPopup')
 
       this.#checkbox.addEventListener('change', (event) => {
         this.#saveCheckboxStatus()
@@ -178,6 +196,11 @@ customElements.define('task-item',
       this.#noDeleteButton.addEventListener('click', (event) => {
         this.#deletePopup.style.display = 'none'
         this.#darkenBackground.style.display = 'none'
+      })
+
+      this.#editButton.addEventListener('click', (event) => {
+        this.#editPopup.style.display = 'flex'
+        this.#darkenBackground.style.display = 'block'
       })
     }
 
