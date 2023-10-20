@@ -97,6 +97,11 @@ template.innerHTML = `
     height: 200px;
   }
 
+  #editPopup h3 {
+    font-size: 24px;
+    margin: 10px;
+  }
+
   #editButtons {
     display: flex;
     justify-content: center;
@@ -104,12 +109,15 @@ template.innerHTML = `
     margin-top: 10px;
   }
 
+  #editButtons button {
+    margin-left: 10px;
+  }
+
   .editButton {
     font-weight: bold;
     width: 70px;
     height: 30px;
     margin-bottom: 5px;
-    margin-left: 10px;
   }
 
   #editPopup input {
