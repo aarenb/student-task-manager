@@ -2,13 +2,16 @@ const template = document.createElement('template')
 template.innerHTML = `
 <style>
   div {
-    background: white;
-    height: 200px;
+    height: 250px;
     margin-right: 50px;
+  }
+
+  img {
+    height: 250px;
   }
 </style>
 <div>
-  <p> a meme! </p>
+  <img src="../images/meme1.jpg">
 </div>
 `
 
