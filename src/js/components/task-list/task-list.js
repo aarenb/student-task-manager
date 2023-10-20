@@ -6,11 +6,22 @@ const template = document.createElement('template')
 template.innerHTML = `
 <style>
   #main{
-    background: yellow;
+    background: rgb(225, 252, 237);
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 20px;
+  }
+
+  h2 {
+    font-size: 38px;
+    text-align: center;
+    text-decoration: underline;
+    margin-top: 0;
+    margin-bottom: 10px;
   }
 </style>
 <div id="main">
-  <h2>Tasks:</h2>
+  <h2>Your tasks:</h2>
 </div>
 `
 
