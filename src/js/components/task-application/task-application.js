@@ -1,5 +1,6 @@
 import '../task-list'
 import '../new-task-form'
+import '../student-meme'
 
 const template = document.createElement('template')
 template.innerHTML = `
@@ -8,10 +9,14 @@ template.innerHTML = `
     background: rgb(54, 255, 168);
     padding: 30px;
     border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+
   }
 </style>
 <div>
   <new-task-form></new-task-form>
+  <student-meme></student-meme>
 </div>
 <task-list></task-list>
 `
