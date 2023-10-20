@@ -2,7 +2,27 @@ const template = document.createElement('template')
 template.innerHTML = `
 <style>
   #main {
-    background: lavender;
+    background: rgb(54, 255, 168);
+    padding: 30px;
+    border-radius: 10px;
+  }
+  h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 32px;
+  }
+  #submitButton {
+    width: 90px;
+    height: 30px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+  input {
+    margin-bottom: 10px;
+  }
+  form {
+    font-size: 18px;
   }
 </style>
 <div id="main">
@@ -18,7 +38,7 @@ template.innerHTML = `
     <input type="number" name="hour" min="0" max="23" required>
     <label> minute: </label>
     <input type="number" name="minute" min="0" max="59" required><br/>
-    <input type="submit" value="Create">
+    <input type="submit" value="Create" id="submitButton">
   </form>
 </div>
 `
