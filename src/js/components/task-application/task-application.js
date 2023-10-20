@@ -8,10 +8,12 @@ template.innerHTML = `
   div {
     background: rgb(54, 255, 168);
     padding: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
-
+    align-items: center;
   }
 </style>
 <div>
