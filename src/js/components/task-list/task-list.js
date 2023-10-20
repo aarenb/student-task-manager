@@ -8,7 +8,7 @@ template.innerHTML = `
   #main{
     background: rgb(227, 255, 240);
     border-radius: 10px;
-    padding: 30px;
+    padding: 20px;
     margin-top: 20px;
     display: flex;
     flex-direction: column;
@@ -25,7 +25,6 @@ template.innerHTML = `
   #tasks{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
   }
 </style>
 <div id="main">

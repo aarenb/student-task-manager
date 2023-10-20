@@ -9,6 +9,7 @@ template.innerHTML = `
     width: 500px;
     border: solid 3px rgb(71, 150, 108);
     margin-bottom: 15px;
+    margin-left: 15px;
   }
   #checkAndName {
     display: flex;
@@ -56,7 +57,7 @@ template.innerHTML = `
     height: 30px;
     font-weight: bold;
   }
-  .popup{
+  .popup {
     z-index: 10;
     top: 0; 
     left: 0;
@@ -65,14 +66,14 @@ template.innerHTML = `
     border: solid 5px black;
     border-radius: 10px;
     background: white;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   #deletePopup {
     width: 440px;
     height: 150px;
     display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
   }
   #deletePopup button {
     width: 100px;
@@ -93,7 +94,7 @@ template.innerHTML = `
   #editPopup{
     display: none;
     width: 440px;
-    height: 150px;
+    height: 200px;
   }
 
 </style>
@@ -127,6 +128,18 @@ template.innerHTML = `
   <div id="editPopup" class="popup">
     <h3> Edit the task: </h3>
     <form>
+      <label> Task name: </label>
+      <input type="text" name="name" id="editName" required><br/>
+      <label> Task description: </label>
+      <input type="text" name="description" id="editDescription" required><br/>
+      <label> Due by: </label>
+      <input type="date" name="date" id="editDate" required>
+      <label> hour: </label>
+      <input type="number" name="hour" min="0" max="23" id="editHour" required>
+      <label> minute: </label>
+      <input type="number" name="minute" min="0" max="59" id="editMinute" required><br/>
+      <input type="submit" value="Edit" id="submitButton">
+      <button type="button" id="cancel"> Cancel </button>
     </form>
   </div>
 </div>
@@ -150,6 +163,7 @@ customElements.define('task-item',
     #darkenBackground
     #editButton
     #editPopup
+    #cancelButton
     /**
      * Creates an instance of the current type.
      */
@@ -171,11 +185,13 @@ customElements.define('task-item',
       this.#darkenBackground = this.shadowRoot.querySelector('#darkenBackground')
       this.#editButton = this.shadowRoot.querySelector('#edit')
       this.#editPopup = this.shadowRoot.querySelector('#editPopup')
+      this.#cancelButton = this.shadowRoot.querySelector('#cancel')
 
       this.#checkbox.addEventListener('change', (event) => {
         this.#saveCheckboxStatus()
       })
 
+      // TODO: Break out popups into their own components?
       this.#deleteButton.addEventListener('click', (event) => {
         this.#deletePopup.style.display = 'flex'
         this.#darkenBackground.style.display = 'block'
@@ -199,9 +215,38 @@ customElements.define('task-item',
       })
 
       this.#editButton.addEventListener('click', (event) => {
+        this.#setValuesInEditPopup()
         this.#editPopup.style.display = 'flex'
         this.#darkenBackground.style.display = 'block'
       })
+
+      this.#cancelButton.addEventListener('click', (event) => {
+        this.#editPopup.style.display = 'none'
+        this.#darkenBackground.style.display = 'none'
+      })
+    }
+
+    /**
+     * Sets the current task values in the edit popup form.
+     */
+    #setValuesInEditPopup () {
+      let taskData = localStorage.getItem(this.#taskId)
+      taskData = JSON.parse(taskData)
+
+      const nameField = this.shadowRoot.querySelector('#editName')
+      nameField.setAttribute('value', taskData.name)
+
+      const descriptionField = this.shadowRoot.querySelector('#editDescription')
+      descriptionField.setAttribute('value', taskData.description)
+
+      const dateField = this.shadowRoot.querySelector('#editDate')
+      dateField.setAttribute('value', taskData.date)
+
+      const hourField = this.shadowRoot.querySelector('#editHour')
+      hourField.setAttribute('value', taskData.hour)
+
+      const minuteField = this.shadowRoot.querySelector('#editMinute')
+      minuteField.setAttribute('value', taskData.minute)
     }
 
     /**
