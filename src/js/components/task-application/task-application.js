@@ -38,6 +38,10 @@ customElements.define('task-application',
       this.#taskForm.addEventListener('newTask', (event) => {
         this.#taskList.setTasks()
       })
+
+      this.addEventListener('deleteTask', (event) => {
+        this.#taskList.setTasks()
+      })
     }
   }
 )

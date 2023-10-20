@@ -117,10 +117,14 @@ customElements.define('task-item',
         this.#deletePopup.style.display = 'flex'
       })
 
+      const deleteTask = new CustomEvent('deleteTask', {
+        bubbles: true,
+        composed: true
+      })
+
       this.#yesDeleteButton.addEventListener('click', (event) => {
         this.#deletePopup.style.display = 'none'
         localStorage.removeItem(this.#taskId)
-        const deleteTask = new CustomEvent('deleteTask')
         this.dispatchEvent(deleteTask)
       })
 
