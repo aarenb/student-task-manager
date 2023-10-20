@@ -2,9 +2,7 @@ const template = document.createElement('template')
 template.innerHTML = `
 <style>
   #main {
-    background: rgb(54, 255, 168);
-    padding: 30px;
-    border-radius: 10px;
+    width: 480px;
   }
   h2 {
     margin-top: 0;

@@ -3,7 +3,16 @@ import '../new-task-form'
 
 const template = document.createElement('template')
 template.innerHTML = `
-<new-task-form></new-task-form>
+<style>
+  div {
+    background: rgb(54, 255, 168);
+    padding: 30px;
+    border-radius: 10px;
+  }
+</style>
+<div>
+  <new-task-form></new-task-form>
+</div>
 <task-list></task-list>
 `
 
