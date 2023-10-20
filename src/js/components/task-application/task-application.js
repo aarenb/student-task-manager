@@ -10,7 +10,6 @@ template.innerHTML = `
   }
 </style>
 <div id="main">
-  <p> this is a task manager application </p>
   <new-task-form></new-task-form>
   <task-list></task-list>
 </div>
