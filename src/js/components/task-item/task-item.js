@@ -35,12 +35,17 @@ template.innerHTML = `
     width: 450px;
     height: 150px;
     background: white;
-    padding: 10px;
     position: fixed;
     top: 0; 
     left: 0;
     transform: translate(calc(50vw - 50%), calc(50vh - 50%));
     display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  #deletePopup button {
+    width: 100px;
   }
 
 </style>
@@ -62,8 +67,10 @@ template.innerHTML = `
 
   <div id="deletePopup">
     <h3> Are you sure you want to delete this task? </h3>
-    <button type="button"> Yes </button>
-    <button type="button"> No </button>
+    <div>
+      <button type="button" id="yesDelete"> Yes </button>
+      <button type="button" id="noDelete"> No </button>
+    </div>
   </div>
 </div>
 `
@@ -81,6 +88,8 @@ customElements.define('task-item',
     #taskId
     #deleteButton
     #deletePopup
+    #yesDeleteButton
+    #noDeleteButton
     /**
      * Creates an instance of the current type.
      */
@@ -97,15 +106,23 @@ customElements.define('task-item',
       this.#checkbox = this.shadowRoot.querySelector('#checkBox')
       this.#deleteButton = this.shadowRoot.querySelector('#delete')
       this.#deletePopup = this.shadowRoot.querySelector('#deletePopup')
-      console.log(this.#deleteButton)
+      this.#yesDeleteButton = this.shadowRoot.querySelector('#yesDelete')
+      this.#noDeleteButton = this.shadowRoot.querySelector('#noDelete')
 
       this.#checkbox.addEventListener('change', (event) => {
         this.#saveCheckboxStatus()
       })
 
       this.#deleteButton.addEventListener('click', (event) => {
-        console.log('click')
-        this.#deletePopup.style.display = 'block'
+        this.#deletePopup.style.display = 'flex'
+      })
+
+      this.#yesDeleteButton.addEventListener('click', (event) => {
+        this.#deletePopup.style.display = 'none'
+      })
+
+      this.#noDeleteButton.addEventListener('click', (event) => {
+        this.#deletePopup.style.display = 'none'
       })
     }
 
