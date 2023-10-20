@@ -3,16 +3,8 @@ import '../new-task-form'
 
 const template = document.createElement('template')
 template.innerHTML = `
-<style>
-  #main{
-    background: pink;
-    padding: 50px;
-  }
-</style>
-<div id="main">
-  <new-task-form></new-task-form>
-  <task-list></task-list>
-</div>
+<new-task-form></new-task-form>
+<task-list></task-list>
 `
 
 customElements.define('task-application',

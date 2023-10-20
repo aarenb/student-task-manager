@@ -3,32 +3,58 @@ const template = document.createElement('template')
 template.innerHTML = `
 <style> 
   #container {
-    background: rgb(230, 139, 240);
-    padding: 12px;
-    border: solid black 2px;
+    background: rgb(175, 252, 211);
+    padding: 20px;
+    border-radius: 10px;
+    width: 500px;
+    border: solid 3px rgb(71, 150, 108);
+    margin-bottom: 15px;
   }
   #checkAndName {
     display: flex;
     align-items: center;
-    background: orange;
+    height: 33px;
   }
   #name {
     margin-left: 8px;
+    font-size: 24px;
+    text-decoration: underline;
+  }
+  #descriptionHeader {
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+  #description {
+    margin: 0;
+    font-size: 18px;
   }
   #checkBox {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
   }
   #dueDate {
     display: flex;
     align-items: center;
     background: green;
+    color: white;
+    padding-left: 10px;
+    width: 200px;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 15px;
   }
   #date {
     margin-left: 8px;
   }
   #time {
     margin-left: 8px;
+  }
+  #buttons button {
+    width: 75px;
+    height: 30px;
+    font-weight: bold;
   }
   #deletePopup {
     z-index: 10;
@@ -54,6 +80,7 @@ template.innerHTML = `
     <input type="checkbox" id="checkBox"/> 
     <h3 id="name"></h3>
   </div>
+  <p id="descriptionHeader"> Description:</p>
   <p id="description"></p>
   <div id="dueDate">
   <p> Due by: </p>

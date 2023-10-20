@@ -8,8 +8,11 @@ template.innerHTML = `
   #main{
     background: rgb(225, 252, 237);
     border-radius: 10px;
-    padding: 10px;
+    padding: 30px;
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   h2 {
