@@ -58,7 +58,7 @@ template.innerHTML = `
   }
   #deletePopup {
     z-index: 10;
-    width: 450px;
+    width: 440px;
     height: 150px;
     background: white;
     position: fixed;
@@ -69,9 +69,13 @@ template.innerHTML = `
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border: solid 5px black;
+    border-radius: 10px;
   }
   #deletePopup button {
     width: 100px;
+    height: 30px;
+    font-weight: bold;
   }
 
 </style>
