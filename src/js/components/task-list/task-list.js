@@ -22,9 +22,16 @@ template.innerHTML = `
     margin-top: 0;
     margin-bottom: 30px;
   }
+  #tasks{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
 </style>
 <div id="main">
   <h2>Your tasks:</h2>
+  <div id="tasks">
+  </div>
 </div>
 `
 
@@ -33,7 +40,7 @@ customElements.define('task-list',
    * Represents a task-list element.
    */
   class extends HTMLElement {
-    #main
+    #tasks
     /**
      * Creates an instance of the current type.
      */
@@ -43,7 +50,7 @@ customElements.define('task-list',
       this.attachShadow({ mode: 'open' })
         .appendChild(template.content.cloneNode(true))
 
-      this.#main = this.shadowRoot.querySelector('#main')
+      this.#tasks = this.shadowRoot.querySelector('#tasks')
 
       this.setTasks()
     }
@@ -70,7 +77,7 @@ customElements.define('task-list',
           newTask.setDueTime(dueTime)
           newTask.setCheckBox(task.isChecked)
           newTask.setTaskId(`${i}`)
-          this.#main.appendChild(newTask)
+          this.#tasks.appendChild(newTask)
         }
       }
     }
