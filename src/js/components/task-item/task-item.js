@@ -42,6 +42,10 @@ template.innerHTML = `
   <p id="date"></p>
   <p id="time"></p>
   </div>
+  <div id="buttons">
+    <button type="button"> Delete </button>
+    <button type="button"> Edit </button>
+  </div>
 </div>
 `
 
