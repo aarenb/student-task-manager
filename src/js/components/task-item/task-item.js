@@ -254,7 +254,7 @@ customElements.define('task-item',
       })
 
       this.#editForm.addEventListener('submit', (event) => {
-        this.saveTaskInfo()
+        this.updateTaskInfo()
         this.#editPopup.style.display = 'none'
         this.#darkenBackground.style.display = 'none'
         this.dispatchEvent(editTask)
@@ -263,25 +263,13 @@ customElements.define('task-item',
     }
 
     /**
-     * Saves the task info to local storage.
+     * Updates the task info to local storage.
      */
-    saveTaskInfo () { // TODO: BREAK THIS OUT!! WEE WOO WEE WOO THIS IS BAD
+    updateTaskInfo () { // TODO: move this????
       const formData = new FormData(this.#editForm)
       const data = Object.fromEntries(formData)
       const taskObject = this.#createTaskObject(data)
-
-      let i = 1
-      let notSet = true
-      while (notSet) {
-        if (localStorage.getItem(`${i}`) === null) {
-          localStorage.setItem(`${i}`, JSON.stringify(taskObject))
-          if (localStorage.getItem('highestTaskId') < i || localStorage.getItem('highestTaskId') === null) {
-            localStorage.setItem('highestTaskId', i)
-          }
-          notSet = false
-        }
-        i++
-      }
+      localStorage.setItem(this.#taskId, JSON.stringify(taskObject))
     }
 
     /**
