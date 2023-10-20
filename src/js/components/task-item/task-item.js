@@ -30,6 +30,25 @@ template.innerHTML = `
   #time {
     margin-left: 8px;
   }
+  #deletePopup {
+    z-index: 10;
+    width: 450px;
+    height: 150px;
+    background: white;
+    padding: 10px;
+    display: none;
+  }
+
+  #centerDiv {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
 </style>
 <div id="container">
   <div id="checkAndName">
@@ -45,6 +64,14 @@ template.innerHTML = `
   <div id="buttons">
     <button type="button"> Delete </button>
     <button type="button"> Edit </button>
+  </div>
+
+  <div id="centerDiv">
+    <div id="deletePopup">
+      <h3> Are you sure you want to delete this task? </h3>
+      <button type="button"> Yes </button>
+      <button type="button"> No </button>
+    </div>
   </div>
 </div>
 `
