@@ -78,6 +78,16 @@ template.innerHTML = `
     font-weight: bold;
   }
 
+  #darkenBackground{
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.51)
+  }
+
 </style>
 <div id="container">
   <div id="checkAndName">
@@ -96,11 +106,13 @@ template.innerHTML = `
     <button type="button"> Edit </button>
   </div>
 
-  <div id="deletePopup">
-    <h3> Are you sure you want to delete this task? </h3>
-    <div>
-      <button type="button" id="yesDelete"> Yes </button>
-      <button type="button" id="noDelete"> No </button>
+  <div id="darkenBackground">
+    <div id="deletePopup">
+      <h3> Are you sure you want to delete this task? </h3>
+      <div>
+        <button type="button" id="yesDelete"> Yes </button>
+        <button type="button" id="noDelete"> No </button>
+      </div>
     </div>
   </div>
 </div>
@@ -121,6 +133,7 @@ customElements.define('task-item',
     #deletePopup
     #yesDeleteButton
     #noDeleteButton
+    #darkenBackground
     /**
      * Creates an instance of the current type.
      */
@@ -139,6 +152,7 @@ customElements.define('task-item',
       this.#deletePopup = this.shadowRoot.querySelector('#deletePopup')
       this.#yesDeleteButton = this.shadowRoot.querySelector('#yesDelete')
       this.#noDeleteButton = this.shadowRoot.querySelector('#noDelete')
+      this.#darkenBackground = this.shadowRoot.querySelector('#darkenBackground')
 
       this.#checkbox.addEventListener('change', (event) => {
         this.#saveCheckboxStatus()
@@ -146,6 +160,7 @@ customElements.define('task-item',
 
       this.#deleteButton.addEventListener('click', (event) => {
         this.#deletePopup.style.display = 'flex'
+        this.#darkenBackground.style.display = 'block'
       })
 
       const deleteTask = new CustomEvent('deleteTask', {
@@ -155,12 +170,14 @@ customElements.define('task-item',
 
       this.#yesDeleteButton.addEventListener('click', (event) => {
         this.#deletePopup.style.display = 'none'
+        this.#darkenBackground.style.display = 'none'
         localStorage.removeItem(this.#taskId)
         this.dispatchEvent(deleteTask)
       })
 
       this.#noDeleteButton.addEventListener('click', (event) => {
         this.#deletePopup.style.display = 'none'
+        this.#darkenBackground.style.display = 'none'
       })
     }
 
