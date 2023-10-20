@@ -82,6 +82,9 @@ customElements.define('new-task-form',
       while (notSet) {
         if (localStorage.getItem(`${i}`) === null) {
           localStorage.setItem(`${i}`, JSON.stringify(taskObject))
+          if (localStorage.getItem('highestTaskId') < i || localStorage.getItem('highestTaskId') === null) {
+            localStorage.setItem('highestTaskId', i)
+          }
           notSet = false
         }
         i++

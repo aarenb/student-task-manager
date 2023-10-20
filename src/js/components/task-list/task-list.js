@@ -60,10 +60,12 @@ customElements.define('task-list',
      */
     setTasks () {
       this.#clearTasks()
-      for (let i = 1; i < localStorage.length + 1; i++) {
-        let task = localStorage.getItem(`${i}`)
-        task = JSON.parse(task)
-        if (task.name !== null) {
+      console.log(localStorage.getItem('highestTaskId'))
+      for (let i = 1; i <= localStorage.getItem('highestTaskId'); i++) {
+        if (localStorage.getItem(`${i}`) !== null) {
+          let task = localStorage.getItem(`${i}`)
+          task = JSON.parse(task)
+
           const taskDate = new Date(Number(task.year), Number(task.month), Number(task.day))
           const dueDate = taskDate.getFormatedDate('dd/mm/yy')
 
