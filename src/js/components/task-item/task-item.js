@@ -1,3 +1,5 @@
+import '../delete-task'
+
 const template = document.createElement('template')
 // TODO: Can you break out this css into seperate file?
 template.innerHTML = `
@@ -70,16 +72,6 @@ template.innerHTML = `
     justify-content: center;
     align-items: center;
   }
-  #deletePopup {
-    width: 440px;
-    height: 150px;
-    display: none;
-  }
-  #deletePopup button {
-    width: 100px;
-    height: 30px;
-    font-weight: bold;
-  }
   #darkenBackground{
     display: none;
     width: 100%;
@@ -136,13 +128,7 @@ template.innerHTML = `
   </div>
 
   <div id="darkenBackground">
-    <div id="deletePopup" class="popup">
-      <h3> Are you sure you want to delete this task? </h3>
-      <div>
-        <button type="button" id="yesDelete"> Yes </button>
-        <button type="button" id="noDelete"> No </button>
-      </div>
-    </div>
+    <delete-task></delete-task>
   </div>
 
   <div id="editPopup" class="popup">
@@ -179,9 +165,7 @@ customElements.define('task-item',
     #checkbox
     #taskId
     #deleteButton
-    #deletePopup
-    #yesDeleteButton
-    #noDeleteButton
+    #deleteTask
     #darkenBackground
     #editButton
     #editPopup
@@ -202,9 +186,7 @@ customElements.define('task-item',
       this.#time = this.shadowRoot.querySelector('#time')
       this.#checkbox = this.shadowRoot.querySelector('#checkBox')
       this.#deleteButton = this.shadowRoot.querySelector('#delete')
-      this.#deletePopup = this.shadowRoot.querySelector('#deletePopup')
-      this.#yesDeleteButton = this.shadowRoot.querySelector('#yesDelete')
-      this.#noDeleteButton = this.shadowRoot.querySelector('#noDelete')
+      this.#deleteTask = this.shadowRoot.querySelector('delete-task')
       this.#darkenBackground = this.shadowRoot.querySelector('#darkenBackground')
       this.#editButton = this.shadowRoot.querySelector('#edit')
       this.#editPopup = this.shadowRoot.querySelector('#editPopup')
@@ -217,24 +199,18 @@ customElements.define('task-item',
 
       // TODO: Break out popups into their own components?
       this.#deleteButton.addEventListener('click', (event) => {
-        this.#deletePopup.style.display = 'flex'
+        this.#deleteTask.style.display = 'block'
         this.#darkenBackground.style.display = 'block'
       })
 
-      const deleteTask = new CustomEvent('deleteTask', {
-        bubbles: true,
-        composed: true
-      })
-
-      this.#yesDeleteButton.addEventListener('click', (event) => {
-        this.#deletePopup.style.display = 'none'
+      this.addEventListener('deleteTask', (event) => {
+        this.#deleteTask.style.display = 'none'
         this.#darkenBackground.style.display = 'none'
         localStorage.removeItem(this.#taskId)
-        this.dispatchEvent(deleteTask)
       })
 
-      this.#noDeleteButton.addEventListener('click', (event) => {
-        this.#deletePopup.style.display = 'none'
+      this.addEventListener('dontDeleteTask', (event) => {
+        this.#deleteTask.style.display = 'none'
         this.#darkenBackground.style.display = 'none'
       })
 
