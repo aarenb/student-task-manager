@@ -57,10 +57,14 @@ customElements.define('new-task-form',
         .appendChild(template.content.cloneNode(true))
 
       this.#form = this.shadowRoot.querySelector('form')
-      const newTask = new CustomEvent('newTask')
 
       this.#form.addEventListener('submit', (event) => {
-        this.saveTaskInfo()
+        const taskData = this.#getTaskData()
+        const newTask = new CustomEvent('newTask', {
+          detail: {
+            data: taskData
+          }
+        })
         this.#form.reset()
         this.dispatchEvent(newTask)
         event.preventDefault()
@@ -68,50 +72,14 @@ customElements.define('new-task-form',
     }
 
     /**
-     * Saves the task info to local storage.
+     * Gets the created task's data from the form.
+     *
+     * @returns {*} The data in a json string format.
      */
-    saveTaskInfo () {
+    #getTaskData () {
       const formData = new FormData(this.#form)
       const data = Object.fromEntries(formData)
-      const taskObject = this.#createTaskObject(data)
-
-      let i = 1
-      let notSet = true
-      while (notSet) {
-        if (localStorage.getItem(`${i}`) === null) {
-          localStorage.setItem(`${i}`, JSON.stringify(taskObject))
-          if (localStorage.getItem('highestTaskId') < i || localStorage.getItem('highestTaskId') === null) {
-            localStorage.setItem('highestTaskId', i)
-          }
-          notSet = false
-        }
-        i++
-      }
-    }
-
-    /**
-     * Creates a new task object.
-     *
-     * @param {*} data - The data to turn into a task object.
-     * @returns {object} The created task object.
-     */
-    #createTaskObject (data) {
-      const yearData = `${data.date.charAt(0)}${data.date.charAt(1)}${data.date.charAt(2)}${data.date.charAt(3)}`
-      const monthData = `${data.date.charAt(5)}${data.date.charAt(6)}`
-      const dayData = `${data.date.charAt(8)}${data.date.charAt(9)}`
-
-      const taskObject = {
-        name: data.name,
-        description: data.description,
-        date: data.date,
-        year: yearData,
-        month: monthData,
-        day: dayData,
-        hour: data.hour,
-        minute: data.minute,
-        isChecked: false
-      }
-      return taskObject
+      return JSON.stringify(data)
     }
   }
 )
