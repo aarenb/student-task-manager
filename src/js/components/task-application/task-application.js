@@ -52,6 +52,8 @@ customElements.define('task-application',
       })
 
       this.addEventListener('editTask', (event) => {
+        this.#saveEditedTask(event.detail.data, event.detail.taskId)
+        console.log('event listenr')
         this.#taskList.setTasks()
       })
     }
@@ -77,6 +79,18 @@ customElements.define('task-application',
         }
         i++
       }
+    }
+
+    /**
+     * Saves an edited task's new data to the local storage.
+     *
+     * @param {*} taskData - The data of the task to save.
+     * @param {string} taskId - The id of the edited task.
+     */
+    #saveEditedTask (taskData, taskId) {
+      taskData = JSON.parse(taskData)
+      const taskObject = this.#createTaskObject(taskData)
+      localStorage.setItem(taskId, JSON.stringify(taskObject))
     }
 
     /**

@@ -256,53 +256,34 @@ customElements.define('task-item',
         this.#darkenBackground.style.display = 'none'
       })
 
-      const editTask = new CustomEvent('editTask', {
-        bubbles: true,
-        composed: true
-      })
-
       this.#editForm.addEventListener('submit', (event) => {
-        this.updateTaskInfo()
+        const taskData = this.#getEditedTaskData()
+
+        const editTask = new CustomEvent('editTask', {
+          bubbles: true,
+          composed: true,
+          detail: {
+            data: taskData,
+            taskId: this.#taskId
+          }
+        })
+
+        this.dispatchEvent(editTask)
         this.#editPopup.style.display = 'none'
         this.#darkenBackground.style.display = 'none'
-        this.dispatchEvent(editTask)
         event.preventDefault()
       })
     }
 
     /**
-     * Updates the task info to local storage.
+     * Gets the edited task's data from the form.
+     *
+     * @returns {*} The data in a json string format.
      */
-    updateTaskInfo () { // TODO: move this????
+    #getEditedTaskData () {
       const formData = new FormData(this.#editForm)
       const data = Object.fromEntries(formData)
-      const taskObject = this.#createTaskObject(data)
-      localStorage.setItem(this.#taskId, JSON.stringify(taskObject))
-    }
-
-    /**
-     * Creates a new task object.
-     *
-     * @param {*} data - The data to turn into a task object.
-     * @returns {object} The created task object.
-     */
-    #createTaskObject (data) { // TODO: BREAK THIS OUT!! WEE WOO WEE WOO THIS IS BAD
-      const yearData = `${data.date.charAt(0)}${data.date.charAt(1)}${data.date.charAt(2)}${data.date.charAt(3)}`
-      const monthData = `${data.date.charAt(5)}${data.date.charAt(6)}`
-      const dayData = `${data.date.charAt(8)}${data.date.charAt(9)}`
-
-      const taskObject = {
-        name: data.name,
-        description: data.description,
-        date: data.date,
-        year: yearData,
-        month: monthData,
-        day: dayData,
-        hour: data.hour,
-        minute: data.minute,
-        isChecked: false
-      }
-      return taskObject
+      return JSON.stringify(data)
     }
 
     /**
