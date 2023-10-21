@@ -37,8 +37,7 @@ customElements.define('student-meme',
      * Assigns a random meme to the image element.
      */
     #assignRandomMeme () {
-      const randomNumber = Math.floor(Math.random() * 11) + 1
-
+      const randomNumber = Math.floor(Math.random() * 16) + 1
       this.#image.setAttribute('src', `../images/meme${randomNumber}.jpg`)
     }
   }
