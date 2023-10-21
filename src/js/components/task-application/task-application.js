@@ -1,6 +1,6 @@
 import '../task-list'
 import '../new-task-form'
-import '../student-meme'
+import '../random-meme'
 
 const template = document.createElement('template')
 template.innerHTML = `
@@ -18,7 +18,7 @@ template.innerHTML = `
 </style>
 <div>
   <new-task-form></new-task-form>
-  <student-meme></student-meme>
+  <random-meme></random-meme>
 </div>
 <task-list></task-list>
 `

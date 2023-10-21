@@ -14,7 +14,7 @@ template.innerHTML = `
 </div>
 `
 
-customElements.define('student-meme',
+customElements.define('random-meme',
   /**
    * Represents a task-application element.
    */
