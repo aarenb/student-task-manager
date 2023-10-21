@@ -24,7 +24,7 @@ template.innerHTML = `
   #descriptionHeader {
     font-weight: bold;
     font-size: 18px;
-    margin-top: 10px;
+    margin-top: 20px;
     margin-bottom: 0;
   }
   #description {
@@ -80,7 +80,6 @@ template.innerHTML = `
     height: 30px;
     font-weight: bold;
   }
-
   #darkenBackground{
     display: none;
     width: 100%;
@@ -90,36 +89,30 @@ template.innerHTML = `
     top: 0;
     background: rgba(0, 0, 0, 0.51)
   }
-
   #editPopup{
     display: none;
     width: 440px;
     height: 200px;
   }
-
   #editPopup h3 {
     font-size: 24px;
     margin: 10px;
   }
-
   #editButtons {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 10px;
   }
-
   #editButtons button {
     margin-left: 10px;
   }
-
   .editButton {
     font-weight: bold;
     width: 70px;
     height: 30px;
     margin-bottom: 5px;
   }
-
   #editPopup input {
     margin-bottom: 5px;
   }
