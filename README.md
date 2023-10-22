@@ -19,5 +19,9 @@ Students who want to organize and keep track of their studies and deadlines.
 - Deployed on Nelify
 - Using the [time-date-manager](https://www.npmjs.com/package/time-date-manager) module
 
+## Website images
+![website image 1](example-img1.png)
+![website image 2](example-img2.png)
+
 ## For developers
 Find more information for developers who want to work with the code [here](developer.md)
