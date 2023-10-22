@@ -38,7 +38,7 @@ customElements.define('random-meme',
      */
     #assignRandomMeme () {
       const randomNumber = Math.floor(Math.random() * 19) + 1
-      this.#image.setAttribute('src', `src/images/meme${randomNumber}.jpg`)
+      this.#image.setAttribute('src', `../images/meme${randomNumber}.jpg`)
     }
   }
 )
