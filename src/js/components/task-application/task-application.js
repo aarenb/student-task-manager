@@ -39,21 +39,27 @@ customElements.define('task-application',
       this.attachShadow({ mode: 'open' })
         .appendChild(template.content.cloneNode(true))
 
+      this.#setInstanceVariables()
+
+      this.#listenForNewTask()
+      this.#listenForDeleteTask()
+      this.#listenForEditTask()
+    }
+
+    /**
+     * Sets the instance variables.
+     */
+    #setInstanceVariables () {
       this.#taskForm = this.shadowRoot.querySelector('new-task-form')
       this.#taskList = this.shadowRoot.querySelector('task-list')
+    }
 
+    /**
+     * Listens for the newTask custom event.
+     */
+    #listenForNewTask () {
       this.#taskForm.addEventListener('newTask', (event) => {
         this.#saveTask(event.detail.data)
-        this.#taskList.setTasks()
-      })
-
-      this.addEventListener('deleteTask', (event) => {
-        this.#taskList.setTasks()
-      })
-
-      this.addEventListener('editTask', (event) => {
-        this.#saveEditedTask(event.detail.data, event.detail.taskId)
-        console.log('event listenr')
         this.#taskList.setTasks()
       })
     }
@@ -79,6 +85,25 @@ customElements.define('task-application',
         }
         i++
       }
+    }
+
+    /**
+     * Listens for the deleteTask custom event.
+     */
+    #listenForDeleteTask () {
+      this.addEventListener('deleteTask', (event) => {
+        this.#taskList.setTasks()
+      })
+    }
+
+    /**
+     * Listens for the editTask custom event.
+     */
+    #listenForEditTask () {
+      this.addEventListener('editTask', (event) => {
+        this.#saveEditedTask(event.detail.data, event.detail.taskId)
+        this.#taskList.setTasks()
+      })
     }
 
     /**
