@@ -16,7 +16,7 @@ template.innerHTML = `
 
 customElements.define('random-meme',
   /**
-   * Represents a task-application element.
+   * Represents a random-meme element.
    */
   class extends HTMLElement {
     #image
