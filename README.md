@@ -9,6 +9,7 @@ Students who want to organize and keep track of their studies and deadlines.
 
 **Features**  
 - Create tasks with a name, short description and a date and time for when it should be complete
+- Tasks are saved in the browser's local storage, so they stay there unless you clear browser cache
 - Tick off completed tasks
 - Edit the task information
 - Delete tasks you no longer wish to see
@@ -17,7 +18,7 @@ Students who want to organize and keep track of their studies and deadlines.
 **Techniques**
 - Javascript, html & css
 - Deployed on Nelify
-- Using the [time-date-manager](https://www.npmjs.com/package/time-date-manager) module
+- Using the [time-date-manager](https://www.npmjs.com/package/time-date-manager) module to get the date and time formats
 
 ## Website images
 ![website image 1](example-img1.png)
