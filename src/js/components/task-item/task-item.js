@@ -2,7 +2,6 @@ import '../delete-task'
 import '../edit-task'
 
 const template = document.createElement('template')
-// TODO: Can you break out this css into seperate file?
 template.innerHTML = `
 <style> 
   #container {
@@ -125,47 +124,38 @@ customElements.define('task-item',
       this.attachShadow({ mode: 'open' })
         .appendChild(template.content.cloneNode(true))
 
+      this.#setInstanceVariables()
+
+      this.#listenForCheckbox()
+      this.#listenForEditButton()
+      this.#listenForCancelEdit()
+      this.#listenForDeleteButton()
+      this.#listenForDeleteTask()
+      this.#listenForDontDeleteTask()
+    }
+
+    /**
+     * Sets the instance variables.
+     */
+    #setInstanceVariables () {
       this.#name = this.shadowRoot.querySelector('#name')
       this.#description = this.shadowRoot.querySelector('#description')
       this.#date = this.shadowRoot.querySelector('#date')
       this.#time = this.shadowRoot.querySelector('#time')
       this.#checkbox = this.shadowRoot.querySelector('#checkBox')
       this.#deleteButton = this.shadowRoot.querySelector('#delete')
-      this.#deleteTask = this.shadowRoot.querySelector('delete-task')
-      this.#darkenBackground = this.shadowRoot.querySelector('#darkenBackground')
       this.#editButton = this.shadowRoot.querySelector('#edit')
+      this.#deleteTask = this.shadowRoot.querySelector('delete-task')
       this.#editTask = this.shadowRoot.querySelector('edit-task')
+      this.#darkenBackground = this.shadowRoot.querySelector('#darkenBackground')
+    }
 
+    /**
+     * Listens for change to the checkbox.
+     */
+    #listenForCheckbox () {
       this.#checkbox.addEventListener('change', (event) => {
         this.#saveCheckboxStatus()
-      })
-
-      this.#deleteButton.addEventListener('click', (event) => {
-        console.log('deletButton')
-        this.#deleteTask.style.display = 'block'
-        this.#darkenBackground.style.display = 'block'
-      })
-
-      this.addEventListener('deleteTask', (event) => {
-        this.#deleteTask.style.display = 'none'
-        this.#darkenBackground.style.display = 'none'
-        localStorage.removeItem(this.#taskId)
-      })
-
-      this.addEventListener('dontDeleteTask', (event) => {
-        this.#deleteTask.style.display = 'none'
-        this.#darkenBackground.style.display = 'none'
-      })
-
-      this.#editButton.addEventListener('click', (event) => {
-        this.#editTask.setFormValues()
-        this.#editTask.style.display = 'block'
-        this.#darkenBackground.style.display = 'block'
-      })
-
-      this.addEventListener('cancelEdit', (event) => {
-        this.#editTask.style.display = 'none'
-        this.#darkenBackground.style.display = 'none'
       })
     }
 
@@ -181,6 +171,85 @@ customElements.define('task-item',
         taskObject.isChecked = 'false'
       }
       localStorage.setItem(this.#taskId, JSON.stringify(taskObject))
+    }
+
+    /**
+     * Listens for a click on the edit button.
+     */
+    #listenForEditButton () {
+      this.#editButton.addEventListener('click', (event) => {
+        this.#editTask.setFormValues()
+        this.#displayEditPopup()
+      })
+    }
+
+    /**
+     * Displays the edit popup.
+     */
+    #displayEditPopup () {
+      this.#editTask.style.display = 'block'
+      this.#darkenBackground.style.display = 'block'
+    }
+
+    /**
+     * Listens for the cancelEdit custom event.
+     */
+    #listenForCancelEdit () {
+      this.addEventListener('cancelEdit', (event) => {
+        this.#hideEditPopup()
+      })
+    }
+
+    /**
+     * Hides the edit popup.
+     */
+    #hideEditPopup () {
+      this.#editTask.style.display = 'none'
+      this.#darkenBackground.style.display = 'none'
+    }
+
+    /**
+     * Listens for a click on the delete button.
+     */
+    #listenForDeleteButton () {
+      this.#deleteButton.addEventListener('click', (event) => {
+        this.#displayDeletePopup()
+      })
+    }
+
+    /**
+     * Displays the delete popup.
+     */
+    #displayDeletePopup () {
+      this.#deleteTask.style.display = 'block'
+      this.#darkenBackground.style.display = 'block'
+    }
+
+    /**
+     * Listens for the deleteTask custom event.
+     */
+    #listenForDeleteTask () {
+      this.addEventListener('deleteTask', (event) => {
+        this.#hideDeletePopup()
+        localStorage.removeItem(this.#taskId)
+      })
+    }
+
+    /**
+     * Listens for the dontDeleteTask custom event.
+     */
+    #listenForDontDeleteTask () {
+      this.addEventListener('dontDeleteTask', (event) => {
+        this.#hideDeletePopup()
+      })
+    }
+
+    /**
+     * Hides the delete popup.
+     */
+    #hideDeletePopup () {
+      this.#deleteTask.style.display = 'none'
+      this.#darkenBackground.style.display = 'none'
     }
 
     /**
@@ -215,7 +284,7 @@ customElements.define('task-item',
      *
      * @param {string} time - The due time to set.
      */
-    setDueTime (time) { // TODO: Change name?
+    setDueTime (time) {
       this.#time.textContent = time
     }
 
