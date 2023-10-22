@@ -34,7 +34,7 @@ template.innerHTML = `
 
 customElements.define('delete-task',
   /**
-   * Represents a task-application element.
+   * Represents a delete-task element.
    */
   class extends HTMLElement {
     #yesButton
@@ -48,24 +48,58 @@ customElements.define('delete-task',
       this.attachShadow({ mode: 'open' })
         .appendChild(template.content.cloneNode(true))
 
+      this.#setInstanceVariables()
+
+      this.#listenForYes()
+      this.#listenForNo()
+    }
+
+    /**
+     * Sets the instance variables.
+     */
+    #setInstanceVariables () {
       this.#yesButton = this.shadowRoot.querySelector('#yes')
       this.#noButton = this.shadowRoot.querySelector('#no')
+    }
 
+    /**
+     * Listens for a click on the yes button.
+     */
+    #listenForYes () {
       this.#yesButton.addEventListener('click', (event) => {
-        const deleteTask = new CustomEvent('deleteTask', {
-          bubbles: true,
-          composed: true
-        })
-        this.dispatchEvent(deleteTask)
+        this.#dispatchDeleteTaskEvent()
       })
+    }
 
-      this.#noButton.addEventListener('click', (event) => {
-        const dontDeleteTask = new CustomEvent('dontDeleteTask', {
-          bubbles: true,
-          composed: true
-        })
-        this.dispatchEvent(dontDeleteTask)
+    /**
+     * Dispatches a custom deleteTask event.
+     */
+    #dispatchDeleteTaskEvent () {
+      const deleteTask = new CustomEvent('deleteTask', {
+        bubbles: true,
+        composed: true
       })
+      this.dispatchEvent(deleteTask)
+    }
+
+    /**
+     * Listens for a click on the no button.
+     */
+    #listenForNo () {
+      this.#noButton.addEventListener('click', (event) => {
+        this.#dispatchDontDeleteTaskEvent()
+      })
+    }
+
+    /**
+     * Dispatches a custom dontDeleteTask event.
+     */
+    #dispatchDontDeleteTaskEvent () {
+      const dontDeleteTask = new CustomEvent('dontDeleteTask', {
+        bubbles: true,
+        composed: true
+      })
+      this.dispatchEvent(dontDeleteTask)
     }
   }
 )
