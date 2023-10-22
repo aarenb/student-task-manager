@@ -70,6 +70,16 @@ customElements.define('task-list',
     }
 
     /**
+     * Removes any task-items inside of the task-list.
+     */
+    #clearTasks () {
+      const tasks = this.shadowRoot.querySelectorAll('task-item')
+      for (let i = 0; i < tasks.length; i++) {
+        tasks[i].remove()
+      }
+    }
+
+    /**
      * Creates a new task-item element.
      *
      * @param {*} taskData - The data for the task.
@@ -91,16 +101,6 @@ customElements.define('task-list',
       newTask.setTaskId(`${taskId}`)
 
       return newTask
-    }
-
-    /**
-     * Removes any task-items inside of the task-list.
-     */
-    #clearTasks () {
-      const tasks = this.shadowRoot.querySelectorAll('task-item')
-      for (let i = 0; i < tasks.length; i++) {
-        tasks[i].remove()
-      }
     }
   }
 )
