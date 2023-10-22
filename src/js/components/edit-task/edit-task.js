@@ -64,7 +64,7 @@ template.innerHTML = `
 
 customElements.define('edit-task',
   /**
-   * Represents a task-application element.
+   * Represents a edit-task element.
    */
   class extends HTMLElement {
     #form
