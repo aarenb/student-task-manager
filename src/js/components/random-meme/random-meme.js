@@ -1,4 +1,4 @@
-import meme1 from './images/meme1.jpg'
+import meme1 from '/images/meme1.jpg'
 
 const template = document.createElement('template')
 template.innerHTML = `
@@ -39,8 +39,8 @@ customElements.define('random-meme',
      * Assigns a random meme to the image element.
      */
     #assignRandomMeme () {
-      const randomNumber = Math.floor(Math.random() * 19) + 1
-      this.#image.setAttribute('src', meme1)
+      // const randomNumber = Math.floor(Math.random() * 19) + 1
+      this.#image.src = meme1
     }
   }
 )
