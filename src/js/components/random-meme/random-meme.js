@@ -1,3 +1,5 @@
+import meme1 from './images/meme1.jpg'
+
 const template = document.createElement('template')
 template.innerHTML = `
 <style>
@@ -10,7 +12,7 @@ template.innerHTML = `
   }
 </style>
 <div>
-  <img src="/images/meme1.jpg">
+  <img>
 </div>
 `
 
@@ -30,7 +32,7 @@ customElements.define('random-meme',
         .appendChild(template.content.cloneNode(true))
 
       this.#image = this.shadowRoot.querySelector('img')
-      // this.#assignRandomMeme()
+      this.#assignRandomMeme()
     }
 
     /**
@@ -38,7 +40,7 @@ customElements.define('random-meme',
      */
     #assignRandomMeme () {
       const randomNumber = Math.floor(Math.random() * 19) + 1
-      this.#image.setAttribute('src', `/images/meme${randomNumber}.jpg`)
+      this.#image.setAttribute('src', meme1)
     }
   }
 )
