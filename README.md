@@ -17,7 +17,7 @@ Students who want to organize and keep track of their studies and deadlines.
 **Techniques**
 - Javascript, html & css
 - Deployed on Nelify
-- Using the [time-date-manager](https://www.npmjs.com/package/time-date-manager) module
+- Using the [time-date-manager](https://www.npmjs.com/package/time-date-manager) module to get the date and time formats
 
 ## Website images
 ![website image 1](example-img1.png)
