@@ -9,6 +9,7 @@ Students who want to organize and keep track of their studies and deadlines.
 
 **Features**  
 - Create tasks with a name, short description and a date and time for when it should be complete
+- Tasks are saved in the browser's local storage, so they stay there unless you clear browser cache
 - Tick off completed tasks
 - Edit the task information
 - Delete tasks you no longer wish to see
