@@ -58,17 +58,30 @@ customElements.define('new-task-form',
 
       this.#form = this.shadowRoot.querySelector('form')
 
+      this.#listenForSubmit()
+    }
+
+    /**
+     * Listens for a submit of the form.
+     */
+    #listenForSubmit () {
       this.#form.addEventListener('submit', (event) => {
-        const taskData = this.#getTaskData()
-        const newTask = new CustomEvent('newTask', {
-          detail: {
-            data: taskData
-          }
-        })
         this.#form.reset()
-        this.dispatchEvent(newTask)
-        event.preventDefault()
+        this.#dispatchNewTaskEvent()
       })
+    }
+
+    /**
+     * Dispatches a custom newTask event.
+     */
+    #dispatchNewTaskEvent () {
+      const taskData = this.#getTaskData()
+      const newTask = new CustomEvent('newTask', {
+        detail: {
+          data: taskData
+        }
+      })
+      this.dispatchEvent(newTask)
     }
 
     /**
