@@ -10,7 +10,7 @@ template.innerHTML = `
   }
 </style>
 <div>
-  <img>
+  <img src="/images/meme1.jpg">
 </div>
 `
 
@@ -30,7 +30,7 @@ customElements.define('random-meme',
         .appendChild(template.content.cloneNode(true))
 
       this.#image = this.shadowRoot.querySelector('img')
-      this.#assignRandomMeme()
+      // this.#assignRandomMeme()
     }
 
     /**
