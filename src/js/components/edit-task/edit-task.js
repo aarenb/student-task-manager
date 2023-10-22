@@ -1,7 +1,7 @@
 const template = document.createElement('template')
 template.innerHTML = `
 <style>
-  #container{
+  #container {
     display: none;
     width: 440px;
     height: 200px;
@@ -45,18 +45,18 @@ template.innerHTML = `
     <h3> Edit the task: </h3>
     <form>
       <label> Task name: </label>
-      <input type="text" name="name" id="name" required><br/>
+      <input type="text" name="name" id="name" required><br>
       <label> Task description: </label>
-      <input type="text" name="description" id="description" required><br/>
+      <input type="text" name="description" id="description" required><br>
       <label> Due by: </label>
       <input type="date" name="date" id="date" required>
       <label> hour: </label>
       <input type="number" name="hour" min="0" max="23" id="hour" required>
       <label> minute: </label>
-      <input type="number" name="minute" min="0" max="59" id="minute" required><br/>
+      <input type="number" name="minute" min="0" max="59" id="minute" required><br>
       <div id="buttons">
         <input type="submit" value="Edit" class="button">
-        <button type="button" id="cancel" class="button"> Cancel </button>
+        <button type="button" class="button"> Cancel </button>
       </div>
     </form>
   </div>
@@ -79,10 +79,25 @@ customElements.define('edit-task',
       this.attachShadow({ mode: 'open' })
         .appendChild(template.content.cloneNode(true))
 
+      this.#setInstanceVariables()
+
+      this.#listenForCancel()
+      this.#listenForSubmit()
+    }
+
+    /**
+     * Sets the instance variables.
+     */
+    #setInstanceVariables () {
       this.#form = this.shadowRoot.querySelector('form')
       this.#cancelButton = this.shadowRoot.querySelector('button')
       this.#taskId = this.getAttribute('taskId')
+    }
 
+    /**
+     * Listens for a click on the cancel button.
+     */
+    #listenForCancel () {
       this.#cancelButton.addEventListener('click', (event) => {
         const cancelEdit = new CustomEvent('cancelEdit', {
           bubbles: true,
@@ -90,7 +105,12 @@ customElements.define('edit-task',
         })
         this.dispatchEvent(cancelEdit)
       })
+    }
 
+    /**
+     * Listens for a submit of the form.
+     */
+    #listenForSubmit () {
       this.#form.addEventListener('submit', (event) => {
         const taskData = this.#getEditedTaskData()
 
@@ -104,6 +124,17 @@ customElements.define('edit-task',
         })
         this.dispatchEvent(editTask)
       })
+    }
+
+    /**
+     * Gets the edited task's data from the form.
+     *
+     * @returns {*} The data in a json string format.
+     */
+    #getEditedTaskData () {
+      const formData = new FormData(this.#form)
+      const data = Object.fromEntries(formData)
+      return JSON.stringify(data)
     }
 
     /**
@@ -129,17 +160,6 @@ customElements.define('edit-task',
 
       const minuteField = this.shadowRoot.querySelector('#minute')
       minuteField.setAttribute('value', taskData.minute)
-    }
-
-    /**
-     * Gets the edited task's data from the form.
-     *
-     * @returns {*} The data in a json string format.
-     */
-    #getEditedTaskData () {
-      const formData = new FormData(this.#form)
-      const data = Object.fromEntries(formData)
-      return JSON.stringify(data)
     }
   }
 )
