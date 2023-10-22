@@ -99,12 +99,19 @@ customElements.define('edit-task',
      */
     #listenForCancel () {
       this.#cancelButton.addEventListener('click', (event) => {
-        const cancelEdit = new CustomEvent('cancelEdit', {
-          bubbles: true,
-          composed: true
-        })
-        this.dispatchEvent(cancelEdit)
+        this.#dispatchCancelEditEvent()
       })
+    }
+
+    /**
+     * Dispatches a custom cancelEdit event.
+     */
+    #dispatchCancelEditEvent () {
+      const cancelEdit = new CustomEvent('cancelEdit', {
+        bubbles: true,
+        composed: true
+      })
+      this.dispatchEvent(cancelEdit)
     }
 
     /**
@@ -112,18 +119,24 @@ customElements.define('edit-task',
      */
     #listenForSubmit () {
       this.#form.addEventListener('submit', (event) => {
-        const taskData = this.#getEditedTaskData()
-
-        const editTask = new CustomEvent('editTask', {
-          bubbles: true,
-          composed: true,
-          detail: {
-            data: taskData,
-            taskId: this.#taskId
-          }
-        })
-        this.dispatchEvent(editTask)
+        this.#dispatchEditTaskEvent()
       })
+    }
+
+    /**
+     * Dispatches a custom editTask event.
+     */
+    #dispatchEditTaskEvent () {
+      const taskData = this.#getEditedTaskData()
+      const editTask = new CustomEvent('editTask', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          data: taskData,
+          taskId: this.#taskId
+        }
+      })
+      this.dispatchEvent(editTask)
     }
 
     /**
