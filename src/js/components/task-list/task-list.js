@@ -59,28 +59,38 @@ customElements.define('task-list',
      */
     setTasks () {
       this.#clearTasks()
-      console.log(localStorage.getItem('highestTaskId'))
       for (let i = 1; i <= localStorage.getItem('highestTaskId'); i++) {
         if (localStorage.getItem(`${i}`) !== null) {
-          let task = localStorage.getItem(`${i}`)
-          task = JSON.parse(task)
-
-          const taskDate = new Date(Number(task.year), Number(task.month), Number(task.day))
-          const dueDate = taskDate.getFormatedDate('dd/mm/yy')
-
-          const taskTime = new Time(Number(task.hour), Number(task.minute))
-          const dueTime = taskTime.getTimeIn24HourClockFormat()
-
-          const newTask = document.createElement('task-item')
-          newTask.setName(task.name)
-          newTask.setDescription(task.description)
-          newTask.setDueDate(dueDate)
-          newTask.setDueTime(dueTime)
-          newTask.setCheckBox(task.isChecked)
-          newTask.setTaskId(`${i}`)
+          let taskData = localStorage.getItem(`${i}`)
+          taskData = JSON.parse(taskData)
+          const newTask = this.#createTaskItem(taskData, i)
           this.#tasks.appendChild(newTask)
         }
       }
+    }
+
+    /**
+     * Creates a new task-item element.
+     *
+     * @param {*} taskData - The data for the task.
+     * @param {number} taskId - The task's id.
+     * @returns {Element} The created task-item.
+     */
+    #createTaskItem (taskData, taskId) {
+      const taskDate = new Date(Number(taskData.year), Number(taskData.month), Number(taskData.day))
+      const dueDate = taskDate.getFormatedDate('dd/mm/yy')
+      const taskTime = new Time(Number(taskData.hour), Number(taskData.minute))
+      const dueTime = taskTime.getTimeIn24HourClockFormat()
+
+      const newTask = document.createElement('task-item')
+      newTask.setName(taskData.name)
+      newTask.setDescription(taskData.description)
+      newTask.setDueDate(dueDate)
+      newTask.setDueTime(dueTime)
+      newTask.setCheckBox(taskData.isChecked)
+      newTask.setTaskId(`${taskId}`)
+
+      return newTask
     }
 
     /**
