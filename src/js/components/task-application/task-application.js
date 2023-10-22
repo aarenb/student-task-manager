@@ -72,17 +72,17 @@ customElements.define('task-application',
       taskData = JSON.parse(taskData)
       const taskObject = this.#createTaskObject(taskData)
 
-      let i = 1
+      let taskId = 1
       let notSet = true
       while (notSet) {
-        if (localStorage.getItem(`${i}`) === null) {
-          localStorage.setItem(`${i}`, JSON.stringify(taskObject))
-          if (localStorage.getItem('highestTaskId') < i || localStorage.getItem('highestTaskId') === null) {
-            localStorage.setItem('highestTaskId', i)
+        if (localStorage.getItem(`${taskId}`) === null) {
+          localStorage.setItem(`${taskId}`, JSON.stringify(taskObject))
+          if (localStorage.getItem('highestTaskId') < taskId || localStorage.getItem('highestTaskId') === null) {
+            localStorage.setItem('highestTaskId', taskId)
           }
           notSet = false
         }
-        i++
+        taskId++
       }
     }
 
