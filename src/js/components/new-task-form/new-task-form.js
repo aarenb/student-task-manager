@@ -66,8 +66,9 @@ customElements.define('new-task-form',
      */
     #listenForSubmit () {
       this.#form.addEventListener('submit', (event) => {
-        this.#form.reset()
         this.#dispatchNewTaskEvent()
+        this.#form.reset()
+        event.preventDefault()
       })
     }
 

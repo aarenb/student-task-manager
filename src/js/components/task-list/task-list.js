@@ -6,10 +6,7 @@ const template = document.createElement('template')
 template.innerHTML = `
 <style>
   #main{
-    background: rgb(227, 255, 240);
-    border-radius: 10px;
-    padding: 20px;
-    margin-top: 20px;
+    padding: 70px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,7 +16,7 @@ template.innerHTML = `
     font-size: 38px;
     text-align: center;
     text-decoration: underline;
-    margin-top: 0;
+    margin-top: 10px;
     margin-bottom: 30px;
   }
   #tasks{

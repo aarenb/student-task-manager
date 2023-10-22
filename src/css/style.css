@@ -1,10 +1,22 @@
 body {
-  background: rgb(185, 250, 215);
+  background: rgb(215, 255, 234);
   font-family: "Comic Sans MS", "Comic Sans";
-  margin: 40px;
+  margin: 0;
 }
 
 h1 {
   text-align: center;
   font-size: 58px;
+}
+
+footer {
+  background: rgb(54, 255, 168);
+  height: 50px;
+  margin-top: 25px;
+  padding-top: 25px;
+}
+
+a {
+  margin-left: 25px;
+  color: black;
 }

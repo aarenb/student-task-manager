@@ -154,7 +154,7 @@ customElements.define('task-item',
      * Listens for change to the checkbox.
      */
     #listenForCheckbox () {
-      this.#checkbox.addEventListener('change', (event) => {
+      this.#checkbox.addEventListener('change', () => {
         this.#saveCheckboxStatus()
       })
     }
@@ -177,7 +177,7 @@ customElements.define('task-item',
      * Listens for a click on the edit button.
      */
     #listenForEditButton () {
-      this.#editButton.addEventListener('click', (event) => {
+      this.#editButton.addEventListener('click', () => {
         this.#editTask.setFormValues()
         this.#displayEditPopup()
       })
@@ -195,7 +195,7 @@ customElements.define('task-item',
      * Listens for the cancelEdit custom event.
      */
     #listenForCancelEdit () {
-      this.addEventListener('cancelEdit', (event) => {
+      this.addEventListener('cancelEdit', () => {
         this.#hideEditPopup()
       })
     }
@@ -212,7 +212,7 @@ customElements.define('task-item',
      * Listens for a click on the delete button.
      */
     #listenForDeleteButton () {
-      this.#deleteButton.addEventListener('click', (event) => {
+      this.#deleteButton.addEventListener('click', () => {
         this.#displayDeletePopup()
       })
     }
@@ -239,7 +239,7 @@ customElements.define('task-item',
      * Listens for the dontDeleteTask custom event.
      */
     #listenForDontDeleteTask () {
-      this.addEventListener('dontDeleteTask', (event) => {
+      this.addEventListener('dontDeleteTask', () => {
         this.#hideDeletePopup()
       })
     }

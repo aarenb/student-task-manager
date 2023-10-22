@@ -98,7 +98,7 @@ customElements.define('edit-task',
      * Listens for a click on the cancel button.
      */
     #listenForCancel () {
-      this.#cancelButton.addEventListener('click', (event) => {
+      this.#cancelButton.addEventListener('click', () => {
         this.#dispatchCancelEditEvent()
       })
     }
@@ -120,6 +120,7 @@ customElements.define('edit-task',
     #listenForSubmit () {
       this.#form.addEventListener('submit', (event) => {
         this.#dispatchEditTaskEvent()
+        event.preventDefault()
       })
     }
 

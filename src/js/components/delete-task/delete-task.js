@@ -66,7 +66,7 @@ customElements.define('delete-task',
      * Listens for a click on the yes button.
      */
     #listenForYes () {
-      this.#yesButton.addEventListener('click', (event) => {
+      this.#yesButton.addEventListener('click', () => {
         this.#dispatchDeleteTaskEvent()
       })
     }
@@ -86,7 +86,7 @@ customElements.define('delete-task',
      * Listens for a click on the no button.
      */
     #listenForNo () {
-      this.#noButton.addEventListener('click', (event) => {
+      this.#noButton.addEventListener('click', () => {
         this.#dispatchDontDeleteTaskEvent()
       })
     }

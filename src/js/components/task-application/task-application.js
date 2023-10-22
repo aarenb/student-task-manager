@@ -10,7 +10,6 @@ template.innerHTML = `
     padding: 30px;
     padding-left: 50px;
     padding-right: 50px;
-    border-radius: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -91,7 +90,7 @@ customElements.define('task-application',
      * Listens for the deleteTask custom event.
      */
     #listenForDeleteTask () {
-      this.addEventListener('deleteTask', (event) => {
+      this.addEventListener('deleteTask', () => {
         this.#taskList.setTasks()
       })
     }
