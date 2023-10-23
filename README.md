@@ -17,10 +17,12 @@ Students who want to organize and keep track of their studies and deadlines.
 
 **Techniques**
 - Javascript, html & css
-- Deployed on Nelify
+- Deployed on Netlify
 - Using the [time-date-manager](https://www.npmjs.com/package/time-date-manager) module to get the date and time formats
 
 ## Website images
+You can find the deployed website [here](https://jolly-strudel-7e3fa1.netlify.app/)  
+
 ![website image 1](example-img1.png)
 ![website image 2](example-img2.png)
 
