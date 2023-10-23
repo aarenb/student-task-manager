@@ -1,5 +1,4 @@
 # Student task manager
-## Project vision
 
 **Background**  
 Every student knows the struggle of having deadlines or exams due, but having a good planner can certainly help make things less stressful. This task manager will help students keep track of their to-do’s and deadlines, with an easy to use interface and fun design to help keep motivation high.
