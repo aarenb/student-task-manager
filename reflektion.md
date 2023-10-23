@@ -1,25 +1,25 @@
 # Reflektioner om clean code
 
-## Kapitel 2 (namngivning)
+## Kapitel 2 (Namngivning)
 Detta kapitlet har påverkat min kod väldigt mycket, framförallt regeln “use intention-revealing names”. Det har för det mesta gjort att mina namn har generellt blivit längre än de brukade vara, eftersom de innehåller mer information nu. Men även om namnen är längre så blir koden helt klart enklare att förstå. Ibland är det dock svårt att komma på ett bra namn, framförallt till metoder som innehåller utbruten kod som tidigare var en del av en annan metod. 
 
 Bildexempel från min modul på ett metod namn jag fortfarande inte är nöjd med:  
 <img width="296" alt="image" src="https://github.com/aarenb/student-task-manager/assets/112412681/cd0940d7-686f-4485-9371-a831d55c4129">
 
 
-## Kapitel 3 (funktioner)
+## Kapitel 3 (Funktioner)
 “Do one thing” och “small” reglerna från clean code betyder att man måste bryta ut väldigt mycket saker i sina metoder. Det är något jag har försökt följa så mycket jag kan i denna uppgift, där jag verkligen har fått väldigt många små metoder. Detta syns absolut mest i min app, framförallt i task-item klassen som har fått väldigt många metoder efter att jag har brutit ut allt. Jag använder mig fortfarande av switch statements i min kod, trots att fast clean code inte tycker att detta är bra, då jag anser att det i vissa fall inte finns något bra alternativ. Dock så har jag försökt korta ner de switch statements som jag hade i min modul kod, vilket gör dem lite bättre eftersom det största problemet med dem enligt clean code är att de är långa.
 
 Bildexempel från task-item med små metoder:  
 <img width="221" alt="image" src="https://github.com/aarenb/student-task-manager/assets/112412681/16239e55-e12b-4072-b4d1-f53033decfbf">
 
-## Kapitel 4 (kommentarer)
+## Kapitel 4 (Kommentarer)
 I clean code står det att “mandated comments” är dåliga, och tar som exempel upp att det är dåligt att ha ett krav om att varje funktion måste ha en javadoc. Jag har i detta projektet valt att använda samma kodstandard som vi har lärt oss i tidigare javascript kurser, och som verkar vara linneuniversitetets kodstandard för just javascript, men den har just denna regeln om att alla publika funktioner ska ha en jsdoc kommentar. Jag brukar ofta upptäcka hur dåliga dessa kan bli, då de i vissa fall bara upprepar vad som koden redan berättar, framförallt om funktionen inte tar några argument eller returnerar något. Om funktionen nu tar argument eller returnerar något så tillägger den iallafall vilken typ dessa är, vilket annars kanske inte hade framkommit av enbart javascript koden. 
 
 Bildexempel från min app på en dålig, påtvingad jsdoc kommentar:  
 <img width="190" alt="image" src="https://github.com/aarenb/student-task-manager/assets/112412681/544138ad-6bf8-4564-979a-d8a1dc1f9c5c">
 
-## Kapitel 5 (formatering)
+## Kapitel 5 (Formatering)
 Jag tycker att reglerna om den vertikala distansen säger emot varandra lite ibland. Om man ska följa “the newspaper metaphor" så kommer först alla publika, hög abstraktion metoder och sen de privata med låg abstraktion. Men sen så står det också i clean code att man ska ha metoder som anropas av en annan metod direkt under den som anropar. Jag har mest följt regeln om att metoder som anropar varandra ska vara nära varandra, då jag anser att det är viktigare för läsbarheten. Om en metod anropas av flera metoder har jag även valt att sätta den efter den sista metoden som anropar den, så att man aldrig behöver skrolla tillbaka för att hitta information om en metod som anropas.
 
 Bildexempel från min modul på hur jag har lagt en metod som anropas av en annan efter anroparen:  
@@ -59,3 +59,8 @@ Bildexempel från min modul på en metod som är utbruten och därför inte anv�
 <img width="178" alt="image" src="https://github.com/aarenb/student-task-manager/assets/112412681/943968d9-fd43-4504-a77a-de3dd923d5d1">
 
 ## Kapitel 11 (System)
+Jag har i min modul valt att inte använda dependency injection när det gäller exceptionHandler klassen, en klass som både Time och Class använder sig av. Istället så skapas en exceptionHandler inuti deras constructor, istället för att skickas in som ett argument. Detta är enligt boken dåligt att göra, men i detta fallet hade det gjort användar upplevelsen värre om den som använder modulen själv måste skapa en exceptionHandler och skicka in den. Det hade dock möjligjort för att skicka in en annan slags exception handler vid testfall, om den nu hade varit depencency injectat.
+
+Bildexempel på hur exceptionHandler skapas i Date's constructor:  
+<img width="205" alt="image" src="https://github.com/aarenb/student-task-manager/assets/112412681/c67f4f91-8df4-4e72-9f98-7a8389b362ae">
+
