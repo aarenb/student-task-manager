@@ -19,7 +19,7 @@ Students who want to organize and keep track of their studies and deadlines.
 - Deployed on Netlify
 - Using the [time-date-manager](https://www.npmjs.com/package/time-date-manager) module to get the date and time formats
 
-## Website images
+## The website
 You can find the deployed website [here](https://jolly-strudel-7e3fa1.netlify.app/)  
 
 ![website image 1](example-img1.png)
